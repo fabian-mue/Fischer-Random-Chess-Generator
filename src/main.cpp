@@ -7,3 +7,10 @@
  */
 
 #include "Generator.h"
+#include <iostream>
+
+int main()
+{
+    std::cout << "Fischer: Where are the starting positions of my chess pieces?" << std::endl;
+    return 0;
+}
