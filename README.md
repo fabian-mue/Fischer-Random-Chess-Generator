@@ -37,7 +37,7 @@ Requirements:
 As soon as the required setup is ready the code can be compiled and the Fischer-Random-Chess-Generator is generated. To apply this, only the resulting binary file "FischerGen" needs to be executed. 
 To compile and execute the final binary, perform the following steps starting from the project top directory:
 
-1. mkdir build & cd build
+1. mkdir build && cd build
 2. cmake ..
 3. make
 4. ./FischerGen
