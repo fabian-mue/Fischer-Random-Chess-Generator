@@ -25,13 +25,9 @@ int main()
         for (j_u8 = 0U; j_u8 < CHESS_BOARD_GRID_NUMBERS; j_u8++)
         {
             chessBoard_a[i_u8][j_u8] = generator.GetBoardPosition(i_u8, j_u8);
-            std::cout << chessBoard_a[i_u8][j_u8];
-	    if(j_u8<7U)
-	    {
-		std::cout <<" ";
-	    }
+            std::cout << chessBoard_a[i_u8][j_u8] << " ";
         }
-         std::cout << std::endl;
+        std::cout << std::endl;
     }
     return 0;
 }

@@ -8,6 +8,9 @@
 
 #include "Generator.h"
 
+#define ROW_INDEX_PAWN_WHITE (6U)
+#define ROW_INDEX_PAWN_BLACK (1U)
+
 Generator::Generator() {}
 
 Generator::~Generator() {}
@@ -21,7 +24,18 @@ void Generator::Init()
     {
         for (j_u8 = 0U; j_u8 < CHESS_BOARD_GRID_NUMBERS; j_u8++)
         {
-            chessBoard_a[i_u8][j_u8] = '0';
+            if (ROW_INDEX_PAWN_WHITE == i_u8)
+            {
+                chessBoard_a[i_u8][j_u8] = "P_w";
+            }
+            else if (ROW_INDEX_PAWN_BLACK == i_u8)
+            {
+                chessBoard_a[i_u8][j_u8] = "P_b";
+            }
+            else
+            {
+                chessBoard_a[i_u8][j_u8] = "___";
+            }
         }
     }
 }
@@ -37,7 +51,7 @@ std::string Generator::GetBoardPosition(const uint8_t index_row, const uint8_t i
     }
     else
     {
-       position = '0';
+       position = "___";
     }
     return position;
 }

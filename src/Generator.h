@@ -22,11 +22,9 @@ class Generator
         /*Destructor */
         virtual ~Generator();
 
-        /* Initialize Generator */
+        /* Initialize Generator and set up chess board with pawns on
+         * their pre-determined positions */
         void Init();
-
-        /* Puts pawns in their pre-determined positions */
-        void SetPawns();
 
         /* Randomly determines the starting positions of all non-pawn chess pieces */
         void DetermineStartingPositionsRandomly();
