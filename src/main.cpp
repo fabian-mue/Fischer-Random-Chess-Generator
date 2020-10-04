@@ -26,6 +26,10 @@ int main()
         {
             chessBoard_a[i_u8][j_u8] = generator.GetBoardPosition(i_u8, j_u8);
             std::cout << chessBoard_a[i_u8][j_u8];
+	    if(j_u8<7U)
+	    {
+		std::cout <<" ";
+	    }
         }
          std::cout << std::endl;
     }
