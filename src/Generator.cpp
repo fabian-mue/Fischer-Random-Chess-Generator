@@ -63,10 +63,12 @@ std::string Generator::GetBoardPosition(const uint8_t index_row, const uint8_t i
 
 void Generator::DetermineStartingPositionsRandomly()
 {
+    uint8_t determinedPosition_u8;
     std::random_device rd;  //Will be used to obtain a seed for the random number engine
     std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
 
     /* Define position of white bishop on black field */
-    std::uniform_int_distribution<> distrib(1, 4);
-    chessBoard_a[FIRST_ROW_INDEX_WHITE][distrib(gen)] = "B_w";
+    std::uniform_int_distribution<> distrib(0, 3);
+    determinedPosition_u8 = 2* distrib(gen);
+    chessBoard_a[FIRST_ROW_INDEX_WHITE][determinedPosition_u8] = "B_w";
 }
