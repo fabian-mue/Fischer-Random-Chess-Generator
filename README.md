@@ -3,6 +3,7 @@
 ## Goal
 
 The aim of this project is to build a generator which creates the starting positions of the pieces for the fischer random chess game variation. The starting positions are randomly generated. In total there are 960 unique possible starting positions. 
+The starting positions  are determined using the method proposed by Ingo Althöfer in 1998 to roll the opening position with only one dice.
 Check the following link to get more detailed information regarding to the "Fischer random chess": https://en.wikipedia.org/wiki/Fischer_random_chess.
 
 
