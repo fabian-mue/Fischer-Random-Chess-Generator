@@ -66,9 +66,30 @@ void Generator::DetermineStartingPositionsRandomly()
     uint8_t determinedPosition_u8;
     std::random_device rd;  //Will be used to obtain a seed for the random number engine
     std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
+    std::uniform_int_distribution<> distrib4(0, 3);
+    std::uniform_int_distribution<> distrib6(0, 5);
+    bool queenPlaced_b = false;
 
     /* Define position of white bishop on black field */
-    std::uniform_int_distribution<> distrib(0, 3);
-    determinedPosition_u8 = 2* distrib(gen);
+
+    determinedPosition_u8 = 2 * distrib4(gen);
     chessBoard_a[FIRST_ROW_INDEX_WHITE][determinedPosition_u8] = "B_w";
+
+    /* Define position of white bishop on white field */
+    determinedPosition_u8 = 2 * distrib4(gen) + 1;
+    chessBoard_a[FIRST_ROW_INDEX_WHITE][determinedPosition_u8] = "B_w";
+
+    determinedPosition_u8 = distrib6(gen);
+    while(!queenPlaced_b)
+    {
+        if ("___" == chessBoard_a[FIRST_ROW_INDEX_WHITE][determinedPosition_u8])
+        {
+            chessBoard_a[FIRST_ROW_INDEX_WHITE][determinedPosition_u8] = "Q_w";
+            queenPlaced_b = true;
+        }
+        else
+        {
+            determinedPosition_u8++;
+        }
+    }
 }
