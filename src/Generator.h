@@ -29,8 +29,11 @@ class Generator
         /* Randomly determines the starting positions of all non-pawn chess pieces */
         void DetermineStartingPositionsRandomly();
 
+        /* Provided information if input position is free */
+        bool IsPositionEmpty(const uint8_t column_u8);
+
         /* Get chess board position defined by input index of row and column */
-        std::string GetBoardPosition(const uint8_t index_row, const uint8_t index_column);
+        std::string GetBoardPosition(const uint8_t row_u8, const uint8_t column_u8);
 
     private:
         std::string chessBoard_a[CHESS_BOARD_GRID_NUMBERS][CHESS_BOARD_GRID_NUMBERS];

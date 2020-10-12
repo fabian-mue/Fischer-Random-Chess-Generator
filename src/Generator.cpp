@@ -45,20 +45,36 @@ void Generator::Init()
     }
 }
 
-std::string Generator::GetBoardPosition(const uint8_t index_row, const uint8_t index_column)
+std::string Generator::GetBoardPosition(const uint8_t row_u8, const uint8_t column_u8)
 {
     std::string position;
 
-    if ((index_row <= (CHESS_BOARD_GRID_NUMBERS - 1U)) && (index_row >= 0U) &&
-            (index_column <= (CHESS_BOARD_GRID_NUMBERS - 1U)) && (index_column >= 0U))
+    if ((row_u8 <= (CHESS_BOARD_GRID_NUMBERS - 1U)) && (row_u8 >= 0U) &&
+            (column_u8 <= (CHESS_BOARD_GRID_NUMBERS - 1U)) && (column_u8 >= 0U))
     {
-        position = chessBoard_a[index_row][index_column];
+        position = chessBoard_a[row_u8][column_u8];
     }
     else
     {
        position = "___";
     }
     return position;
+}
+
+bool Generator::IsPositionEmpty(const uint8_t column_u8)
+{
+    bool free_b;
+
+    if ("___" == chessBoard_a[FIRST_ROW_INDEX_WHITE][column_u8])
+    {
+        chessBoard_a[FIRST_ROW_INDEX_WHITE][column_u8] = "___";
+        free_b = true;
+    }
+    else
+    {
+        free_b = false;
+    }
+    return free_b;
 }
 
 void Generator::DetermineStartingPositionsRandomly()
@@ -82,7 +98,7 @@ void Generator::DetermineStartingPositionsRandomly()
     determinedPosition_u8 = distrib6(gen);
     while(!queenPlaced_b)
     {
-        if ("___" == chessBoard_a[FIRST_ROW_INDEX_WHITE][determinedPosition_u8])
+        if (IsPositionEmpty(determinedPosition_u8))
         {
             chessBoard_a[FIRST_ROW_INDEX_WHITE][determinedPosition_u8] = "Q_w";
             queenPlaced_b = true;
