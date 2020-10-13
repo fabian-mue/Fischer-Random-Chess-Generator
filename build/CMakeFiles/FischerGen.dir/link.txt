@@ -1,0 +1,1 @@
+/usr/bin/g++     CMakeFiles/FischerGen.dir/src/Generator.cpp.o CMakeFiles/FischerGen.dir/src/main.cpp.o  -o FischerGen 

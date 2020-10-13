@@ -1,0 +1,3 @@
+/home/fabian/Fischer-Random-Chess-Generator/build/CMakeFiles/rebuild_cache.dir
+/home/fabian/Fischer-Random-Chess-Generator/build/CMakeFiles/FischerGen.dir
+/home/fabian/Fischer-Random-Chess-Generator/build/CMakeFiles/edit_cache.dir

@@ -29,6 +29,9 @@ class Generator
         /* Randomly determines the starting positions of all non-pawn chess pieces */
         void DetermineStartingPositionsRandomly();
 
+        /* Get starting position of black pieces by mirroring them */
+        void MirrorBlackPieces();
+
         /* Provided information if input position is free */
         bool IsPositionEmpty(const uint8_t column_u8);
 

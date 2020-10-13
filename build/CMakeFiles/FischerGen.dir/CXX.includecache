@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/fabian/Fischer-Random-Chess-Generator/src/Generator.cpp
+Generator.h
+/home/fabian/Fischer-Random-Chess-Generator/src/Generator.h
+random
+-
+
+/home/fabian/Fischer-Random-Chess-Generator/src/Generator.h
+string
+-
+
+/home/fabian/Fischer-Random-Chess-Generator/src/main.cpp
+Generator.h
+/home/fabian/Fischer-Random-Chess-Generator/src/Generator.h
+iostream
+-
+
