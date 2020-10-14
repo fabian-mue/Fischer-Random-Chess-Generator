@@ -10,6 +10,7 @@
 #define GENERATOR_H
 
 #include <string>
+#include <random>
 #define CHESS_BOARD_GRID_NUMBERS (8U)
 
 
@@ -22,9 +23,8 @@ class Generator
         /*Destructor */
         virtual ~Generator();
 
-        /* Initialize Generator and set up chess board with pawns on
-         * their pre-determined positions */
-        void Init();
+        /* Initializes chess board with pawns on their pre-determined positions */
+        void InitChessBoard();
 
         /* Randomly determines the starting positions of all non-pawn chess pieces */
         void DetermineStartingPositionsRandomly();
@@ -38,8 +38,24 @@ class Generator
         /* Get chess board position defined by input index of row and column */
         std::string GetBoardPosition(const uint8_t row_u8, const uint8_t column_u8);
 
+        /* Define position of white bishop on white or black field */
+        void PlaceBishop(bool whiteField_b);
+
+        /* Define position of white queen */
+        void PlaceQueen();
+
+        /* Define position of white knight */
+        void PlaceKnight();
+
+        /* Define position of white king */
+        void PlaceKing();
+
+         /* Define position of white rook */
+        void PlaceRook();
+
     private:
         std::string chessBoard_a[CHESS_BOARD_GRID_NUMBERS][CHESS_BOARD_GRID_NUMBERS];
+        std::random_device rd;  //Will be used to obtain a seed for the random number engine
 };
 
 #endif  // GENERATOR_H

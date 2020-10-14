@@ -20,7 +20,7 @@ Generator::Generator() {}
 
 Generator::~Generator() {}
 
-void Generator::Init()
+void Generator::InitChessBoard()
 {
     uint8_t i_u8;
     uint8_t j_u8;
@@ -79,100 +79,14 @@ bool Generator::IsPositionEmpty(const uint8_t column_u8)
 
 void Generator::DetermineStartingPositionsRandomly()
 {
-    uint8_t determinedPosition_u8;
-    uint8_t i_u8;
-    std::random_device rd;  //Will be used to obtain a seed for the random number engine
-    std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
-    std::uniform_int_distribution<> distrib4(0, 3);
-    std::uniform_int_distribution<> distrib6(0, 5);
-    std::uniform_int_distribution<> distrib8(0, 7);
-    bool queenPlaced_b = false;
-    bool knight1Placed_b = false;
-    bool knight2Placed_b = false;
-
-    /* Define position of white bishop on black field */
-
-    determinedPosition_u8 = 2 * distrib4(gen);
-    chessBoard_a[FIRST_ROW_INDEX_WHITE][determinedPosition_u8] = "B_w";
-
-    /* Define position of white bishop on white field */
-    determinedPosition_u8 = 2 * distrib4(gen) + 1;
-    chessBoard_a[FIRST_ROW_INDEX_WHITE][determinedPosition_u8] = "B_w";
-
-    /* Define position of white queen */
-    determinedPosition_u8 = distrib6(gen);
-    while(!queenPlaced_b)
-    {
-        if (IsPositionEmpty(determinedPosition_u8))
-        {
-            chessBoard_a[FIRST_ROW_INDEX_WHITE][determinedPosition_u8] = "Q_w";
-            queenPlaced_b = true;
-        }
-        else
-        {
-            determinedPosition_u8++;
-        }
-    }
-
-    /* Define position of first knight */
-    determinedPosition_u8 = distrib8(gen);
-    while(!knight1Placed_b)
-    {
-        if (IsPositionEmpty(determinedPosition_u8))
-        {
-            chessBoard_a[FIRST_ROW_INDEX_WHITE][determinedPosition_u8] = "N_w";
-            knight1Placed_b = true;
-        }
-        else
-        {
-            determinedPosition_u8 = distrib8(gen);
-        }
-    }
-
-    /* Define position of second knight */
-    determinedPosition_u8 = distrib8(gen);
-    while(!knight2Placed_b)
-    {
-        if (IsPositionEmpty(determinedPosition_u8))
-        {
-            chessBoard_a[FIRST_ROW_INDEX_WHITE][determinedPosition_u8] = "N_w";
-            knight2Placed_b = true;
-        }
-        else
-        {
-            determinedPosition_u8 = distrib8(gen);
-        }
-    }
-
-    /* Define position of first rook */
-    for (i_u8 = 0U; i_u8 < CHESS_BOARD_GRID_NUMBERS; i_u8++)
-    {
-        if (IsPositionEmpty(i_u8))
-        {
-            chessBoard_a[FIRST_ROW_INDEX_WHITE][i_u8] = "R_w";
-            break;
-        }
-    }
-
-    /* Define position of king */
-    for (i_u8 = 0U; i_u8 < CHESS_BOARD_GRID_NUMBERS; i_u8++)
-    {
-        if (IsPositionEmpty(i_u8))
-        {
-            chessBoard_a[FIRST_ROW_INDEX_WHITE][i_u8] = "K_w";
-            break;
-        }
-    }
-
-    /* Define position of second rook */
-    for (i_u8 = 0U; i_u8 < CHESS_BOARD_GRID_NUMBERS; i_u8++)
-    {
-        if (IsPositionEmpty(i_u8))
-        {
-            chessBoard_a[FIRST_ROW_INDEX_WHITE][i_u8] = "R_w";
-            break;
-        }
-    }
+    PlaceBishop(true);
+    PlaceBishop(false);
+    PlaceQueen();
+    PlaceKnight();
+    PlaceKnight();
+    PlaceRook();
+    PlaceKing();
+    PlaceRook();
 
     MirrorBlackPieces();
 }
@@ -188,5 +102,91 @@ void Generator::MirrorBlackPieces()
         whitePiece = chessBoard_a[FIRST_ROW_INDEX_WHITE][i_u8];
         blackPiece = whitePiece.replace(2, 1, "b");
         chessBoard_a[FIRST_ROW_INDEX_BLACK][i_u8] = blackPiece;
+    }
+}
+
+void Generator::PlaceBishop(bool whiteField_b)
+{
+    std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
+    std::uniform_int_distribution<> distrib4(0, 3);
+    uint8_t determinedPosition_u8;
+
+    if (false != whiteField_b)
+    {
+        determinedPosition_u8 = 2 * distrib4(gen) + 1;
+        chessBoard_a[FIRST_ROW_INDEX_WHITE][determinedPosition_u8] = "B_w";
+    }
+    else
+    {
+        determinedPosition_u8 = 2 * distrib4(gen);
+        chessBoard_a[FIRST_ROW_INDEX_WHITE][determinedPosition_u8] = "B_w";
+    }
+}
+
+void Generator::PlaceQueen()
+{
+    std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
+    std::uniform_int_distribution<> distrib6(0, 5);
+    uint8_t determinedPosition_u8 = distrib6(gen);
+    bool queenPlaced_b = false;
+
+    while(!queenPlaced_b)
+    {
+        if (IsPositionEmpty(determinedPosition_u8))
+        {
+            chessBoard_a[FIRST_ROW_INDEX_WHITE][determinedPosition_u8] = "Q_w";
+            queenPlaced_b = true;
+        }
+        else
+        {
+            determinedPosition_u8++;
+        }
+    }
+}
+
+void Generator::PlaceKnight()
+{
+    std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
+    std::uniform_int_distribution<> distrib8(0, 7);
+    uint8_t determinedPosition_u8 = distrib8(gen);
+    bool knightPlaced_b = false;
+
+    while(!knightPlaced_b)
+    {
+        if (IsPositionEmpty(determinedPosition_u8))
+        {
+            chessBoard_a[FIRST_ROW_INDEX_WHITE][determinedPosition_u8] = "N_w";
+            knightPlaced_b = true;
+        }
+        else
+        {
+            determinedPosition_u8 = distrib8(gen);
+        }
+    }
+}
+
+void Generator::PlaceKing()
+{
+    uint8_t i_u8;
+    for (i_u8 = 0U; i_u8 < CHESS_BOARD_GRID_NUMBERS; i_u8++)
+    {
+        if (IsPositionEmpty(i_u8))
+        {
+            chessBoard_a[FIRST_ROW_INDEX_WHITE][i_u8] = "K_w";
+            break;
+        }
+    }
+}
+
+void Generator::PlaceRook()
+{
+    uint8_t i_u8;
+    for (i_u8 = 0U; i_u8 < CHESS_BOARD_GRID_NUMBERS; i_u8++)
+    {
+        if (IsPositionEmpty(i_u8))
+        {
+            chessBoard_a[FIRST_ROW_INDEX_WHITE][i_u8] = "R_w";
+            break;
+        }
     }
 }

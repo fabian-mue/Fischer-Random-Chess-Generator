@@ -15,6 +15,8 @@ random
 /home/fabian/Fischer-Random-Chess-Generator/src/Generator.h
 string
 -
+random
+-
 
 /home/fabian/Fischer-Random-Chess-Generator/src/main.cpp
 Generator.h
