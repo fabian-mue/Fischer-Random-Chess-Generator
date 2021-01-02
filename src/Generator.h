@@ -12,7 +12,10 @@
 #include <string>
 #include <random>
 #define CHESS_BOARD_GRID_NUMBERS (8U)
-
+#define FIRST_ROW_INDEX_WHITE (7U)
+#define ROW_INDEX_PAWN_WHITE (6U)
+#define FIRST_ROW_INDEX_BLACK (0U)
+#define ROW_INDEX_PAWN_BLACK (1U)
 
 class Generator
 {

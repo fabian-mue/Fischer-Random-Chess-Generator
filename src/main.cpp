@@ -7,12 +7,16 @@
  */
 
 #include "Generator.h"
+#include "Board.h"
 #include <iostream>
 
-int main()
+static void DefineAbstractChessBoard();
+
+static void DefineAbstractChessBoard()
 {
     Generator generator;
-    std::string chessBoard_a[CHESS_BOARD_GRID_NUMBERS][CHESS_BOARD_GRID_NUMBERS];
+    MyBoard myBoard;
+    std::string abstractBoard_a[CHESS_BOARD_GRID_NUMBERS * CHESS_BOARD_GRID_NUMBERS];
     uint8_t i_u8;
     uint8_t j_u8;
 
@@ -24,11 +28,25 @@ int main()
     {
         for (j_u8 = 0U; j_u8 < CHESS_BOARD_GRID_NUMBERS; j_u8++)
         {
-            chessBoard_a[i_u8][j_u8] = generator.GetBoardPosition(i_u8, j_u8);
-            std::cout << chessBoard_a[i_u8][j_u8] << " ";
+            abstractBoard_a[i_u8*CHESS_BOARD_GRID_NUMBERS + j_u8] = generator.GetBoardPosition(i_u8, j_u8);
+            std::cout << abstractBoard_a[i_u8*CHESS_BOARD_GRID_NUMBERS + j_u8] << " ";
         }
         std::cout << std::endl;
     }
-
-    return 0;
+    myBoard.SetAbstractChessBoard(abstractBoard_a);
 }
+
+class FischerChessGeneratorApp : public wxApp
+{
+    public:
+        virtual bool OnInit()
+        {
+            ::wxInitAllImageHandlers();
+            DefineAbstractChessBoard();
+            MyBoard* frame = new MyBoard();
+            frame->Show();
+            return true;
+        }
+};
+
+wxIMPLEMENT_APP(FischerChessGeneratorApp);

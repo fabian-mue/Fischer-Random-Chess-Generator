@@ -9,11 +9,6 @@
 #include "Generator.h"
 #include <random>
 
-#define FIRST_ROW_INDEX_WHITE (7U)
-#define ROW_INDEX_PAWN_WHITE (6U)
-#define FIRST_ROW_INDEX_BLACK (0U)
-#define ROW_INDEX_PAWN_BLACK (1U)
-
 using std::normal_distribution;
 
 Generator::Generator() {}
